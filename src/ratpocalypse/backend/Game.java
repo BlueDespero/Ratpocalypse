@@ -4,13 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import ratpocalypse.backend.states.GameState;
-import ratpocalypse.backend.states.LoseState;
-import ratpocalypse.backend.states.MenuState;
-import ratpocalypse.backend.states.SettingsState;
-import ratpocalypse.backend.states.ShopState;
 import ratpocalypse.backend.states.StateMenager;
-import ratpocalypse.backend.states.WinState;
 import ratpocalypse.display.Display;
 import ratpocalypse.display.gfx.Assets;
 

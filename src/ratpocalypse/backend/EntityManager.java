@@ -36,6 +36,12 @@ public class EntityManager {
 		this.handler = handler;
 	}
 	
+	public void clearentities()
+	{
+		entities.clear();
+		futureentities.clear();
+	}
+	
 	public boolean collisionpair(Entity a, Entity b)
 	{
 		if(a.getY()==b.getY() && (Math.abs(a.getX()-b.getX()) <= (a.getSpeed()+b.getSpeed()) ) )

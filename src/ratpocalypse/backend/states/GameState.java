@@ -18,6 +18,7 @@ public class GameState extends State {
 		
 	public GameState(Handler handler) {
 		super(handler);
+		handler.getGame().getEntityManager().clearentities();
 		this.gameArea = new GameArea(handler);
 		this.selectionArea = new SelectionArea(handler);
 		this.counter=0;
@@ -52,10 +53,10 @@ public class GameState extends State {
 		if (counter==60) {
 			if(GameVariableManager.yellowRoses<=0)
 				StateMenager.setState("lose");
-			GameVariableManager.yellowRoses+=(11-handler.getGame().getGvmanager().difficulty);
+			GameVariableManager.yellowRoses+=(11-GameVariableManager.getDifficulty());
 			counter = 0;
 			generateRat();
-			for (int i = 0; i < handler.getGame().getGvmanager().difficulty/4; i++)
+			for (int i = 0; i < (GameVariableManager.getDifficulty()/4); i++)
 				generateRat();
 			timer--;
 			if(timer==0)

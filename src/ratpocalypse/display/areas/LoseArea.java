@@ -1,19 +1,17 @@
 package ratpocalypse.display.areas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import ratpocalypse.backend.Handler;
 import ratpocalypse.backend.states.StateMenager;
 import ratpocalypse.display.buttons.ColorTextButton;
 
-public class ShopArea extends Area {
+public class LoseArea extends Area {
 	
-	public ShopArea(Handler handler) {
+	public LoseArea(Handler handler) {
 		super(handler);
-		//buttonlist.add(createDefaultButton("Jednostki", 150));
-		//buttonlist.add(createDefaultButton("Ulepszenia", 250));
-		//buttonlist.add(createDefaultButton("Muzyka", 350));
-		buttonlist.add(new ColorTextButton(handler, 450, "Wstecz", ((Void) -> {StateMenager.setState("menu"); return null;} )));
+		buttonlist.add(new ColorTextButton(handler, 500, "Menu", ((Void) -> {StateMenager.setState("menu"); return null;}), Color.red, Color.black ));
 	}
 
 	@Override
