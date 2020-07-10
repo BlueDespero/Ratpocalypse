@@ -3,13 +3,13 @@ package ratpocalypse.backend.states;
 import ratpocalypse.backend.GameVariableManager;
 import ratpocalypse.backend.Handler;
 
-public class StateMenager {
+public class StateManager {
 	
 	private static State currentState = null;
 	static Handler handler;
 	
-	public StateMenager(Handler handler) {
-		StateMenager.handler = handler;
+	public StateManager(Handler handler) {
+		StateManager.handler = handler;
 	}
 	
 	public static void setState(String s) {

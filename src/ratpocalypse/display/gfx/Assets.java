@@ -13,7 +13,7 @@ public class Assets {
 	public static Image uziPlant, shotgunPlant, bitingPlant, palmPlant; 
 	public static Image bombPlant, shroomPlant, rosePlant, roseShinyPlant, oddishPlant;
 	
-	public static BufferedImage standardBackground, shopBackground, mainBackground, loseBackground, winBackground, settings;
+	public static BufferedImage standardBackground, shopBackground, mainBackground, loseBackground, winBackground, settings, pauseBackground;
 	
 	private static SpriteSheet ratSheet;
 	
@@ -24,6 +24,7 @@ public class Assets {
 		mainBackground = ImageLoader.loadImage("/textures/background/MainMenu.png");
 		loseBackground = ImageLoader.loadImage("/textures/background/LoseBaskground.png");
 		winBackground = ImageLoader.loadImage("/textures/background/Win.png");
+		pauseBackground = ImageLoader.loadImage("/textures/background/pausebackground.png");
 		settings = ImageLoader.loadImage("/textures/background/settings.png");
 
 		

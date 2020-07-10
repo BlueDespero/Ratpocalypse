@@ -2,20 +2,20 @@ package ratpocalypse.backend;
 
 public class GameVariableManager {
 
-	private Handler handler;
 	public boolean[] unlocked;
 	public int selectedUnit;
 	public static int yellowRoses;
 	public static int lastYellowRoses;
 	public static int difficulty;
+	public static boolean pause;
 	
-	public GameVariableManager(Handler handler) {
-		this.handler=handler;
+	public GameVariableManager() {
 		this.unlocked = new boolean[9];
 		this.unlocked[0] = true;
 		this.selectedUnit = 0;
 		GameVariableManager.yellowRoses = 200;
 		GameVariableManager.difficulty=1;
+		GameVariableManager.pause=false;
 	}
 
 	public int getSelectedUnit() {
@@ -57,5 +57,12 @@ public class GameVariableManager {
 	public static void decrementDifficulty() {
 		GameVariableManager.difficulty-=1;
 	}
-	
+
+	public static boolean isPause() {
+		return pause;
+	}
+
+	public static void setPause(boolean pause) {
+		GameVariableManager.pause = pause;
+	}
 }

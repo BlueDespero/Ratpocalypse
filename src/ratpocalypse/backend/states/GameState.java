@@ -7,6 +7,7 @@ import ratpocalypse.backend.GameVariableManager;
 import ratpocalypse.backend.Handler;
 import ratpocalypse.display.areas.Area;
 import ratpocalypse.display.areas.GameArea;
+import ratpocalypse.display.areas.PauseArea;
 import ratpocalypse.display.areas.SelectionArea;
 import ratpocalypse.display.gfx.Assets;
 
@@ -14,6 +15,7 @@ public class GameState extends State {
 	
 	private Area gameArea;
 	private Area selectionArea;
+	private Area pauseArea;
 	private int counter, timer;
 		
 	public GameState(Handler handler) {
@@ -21,14 +23,20 @@ public class GameState extends State {
 		handler.getGame().getEntityManager().clearentities();
 		this.gameArea = new GameArea(handler);
 		this.selectionArea = new SelectionArea(handler);
+		this.pauseArea = new PauseArea(handler);
 		this.counter=0;
 		this.timer=180;
 	}
 	
 	@Override
 	public void OnClick(int MouseX, int MouseY) {
-		selectionArea.onClick(MouseX, MouseY);
-		gameArea.onClick(MouseX, MouseY);
+		if (GameVariableManager.isPause())
+			pauseArea.onClick(MouseX, MouseY);
+		else
+		{
+			selectionArea.onClick(MouseX, MouseY);
+			gameArea.onClick(MouseX, MouseY);
+		}
 	}
 	
 	private void generateRat() {
@@ -43,6 +51,14 @@ public class GameState extends State {
 	}
 	
 	public void tick() {
+		if (GameVariableManager.isPause())
+			pauseArea.tick();
+		else
+			gametick();
+	}
+
+	public void gametick()
+	{
 		handler.getGame().setStateName("game");
 		handler.getGame().getEntityManager().fflushfutureentities();
 		handler.getGame().getEntityManager().getEntities().removeIf(n -> (n.isAlive()==false));
@@ -52,7 +68,7 @@ public class GameState extends State {
 		counter+=1;
 		if (counter==60) {
 			if(GameVariableManager.yellowRoses<=0)
-				StateMenager.setState("lose");
+				StateManager.setState("lose");
 			GameVariableManager.yellowRoses+=(11-GameVariableManager.getDifficulty());
 			counter = 0;
 			generateRat();
@@ -60,10 +76,10 @@ public class GameState extends State {
 				generateRat();
 			timer--;
 			if(timer==0)
-				StateMenager.setState("win");
+				StateManager.setState("win");
 		}
 	}
-
+	
 	private void rendertimer(Graphics g) {
 		int minutes = timer/60;
 		int sec = timer%60;
@@ -79,13 +95,27 @@ public class GameState extends State {
 	}
 	
 	public void render(Graphics g) {
+		if(GameVariableManager.isPause())
+			pauserender(g);
+		else
+			gamerender(g);
+	}
+	
+	public void pauserender(Graphics g)
+	{
+		g.drawImage(Assets.pauseBackground, 0*renderUnitWidth, 0*renderUnitHeight, null);
+		pauseArea.render(g);
+	}
+	
+	public void gamerender(Graphics g)
+	{
 		g.drawImage(Assets.standardBackground, 0*renderUnitWidth, 0*renderUnitHeight, null);
-		handler.getGame().getEntityManager().render(g);
 		selectionArea.render(g);
 		rendertimer(g);
 		gameArea.render(g);
+		handler.getGame().getEntityManager().render(g);	
 	}
-
+	
 	public  Area getGameArea() {
 		return gameArea;
 	}

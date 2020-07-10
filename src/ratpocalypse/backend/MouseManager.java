@@ -3,7 +3,7 @@ package ratpocalypse.backend;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import ratpocalypse.backend.states.StateMenager;
+import ratpocalypse.backend.states.StateManager;
 
 public class MouseManager implements java.awt.event.MouseListener, MouseMotionListener {
 
@@ -28,7 +28,7 @@ public class MouseManager implements java.awt.event.MouseListener, MouseMotionLi
 		
 		if(e.getButton() == MouseEvent.BUTTON1)
 		{
-			StateMenager.getState().OnClick(MouseX, MouseY);
+			StateManager.getState().OnClick(MouseX, MouseY);
 		}
 		else
 			handler.getGame().getGvmanager().selectedUnit=0;

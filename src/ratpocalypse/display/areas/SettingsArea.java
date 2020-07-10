@@ -6,7 +6,7 @@ import java.awt.Graphics;
 
 import ratpocalypse.backend.GameVariableManager;
 import ratpocalypse.backend.Handler;
-import ratpocalypse.backend.states.StateMenager;
+import ratpocalypse.backend.states.StateManager;
 import ratpocalypse.display.buttons.ColorTextButton;
 import ratpocalypse.display.gfx.Assets;
 
@@ -16,7 +16,7 @@ public class SettingsArea extends Area {
 		super(handler);	
 		buttonlist.add(new ColorTextButton(handler, 150, "Zwiększ poziom trudności!", ((Void) -> {GameVariableManager.incrementDifficulty(); return null;} ) ));
 		buttonlist.add(new ColorTextButton(handler, 350, "Zmniejsz poziom trudności", ((Void) -> {GameVariableManager.decrementDifficulty(); if(GameVariableManager.getDifficulty()<1) GameVariableManager.setDifficulty(1); return null;} ) ));
-		buttonlist.add(new ColorTextButton(handler, 450, "Wstecz", ((Void) -> {StateMenager.setState("menu"); return null;} )));
+		buttonlist.add(new ColorTextButton(handler, 450, "Wstecz", ((Void) -> {StateManager.setState("menu"); return null;} )));
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-import ratpocalypse.backend.states.StateMenager;
+import ratpocalypse.backend.states.StateManager;
 import ratpocalypse.display.Display;
 import ratpocalypse.display.gfx.Assets;
 
@@ -29,7 +29,7 @@ public class Game implements Runnable {
 	//Managers
 	private EntityManager entityManager;
 	private GameVariableManager gvmanager;
-	private StateMenager stateMenager;
+	private StateManager stateManager;
 	
 	//Handler
 	private Handler handler;	
@@ -49,8 +49,8 @@ public class Game implements Runnable {
 		mouseManager = new MouseManager(handler);
 		
 		entityManager = new EntityManager(handler);
-		gvmanager = new GameVariableManager(handler);
-		stateMenager = new StateMenager(handler);
+		gvmanager = new GameVariableManager();
+		setStateMenager(new StateManager(handler));
 		
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
@@ -60,13 +60,13 @@ public class Game implements Runnable {
 		display.getCanvas().addMouseMotionListener(mouseManager);
 		Assets.init();
 		
-		StateMenager.setState("menu");
+		StateManager.setState("menu");
 	}
 	
 	private void tick() {
 		
-		if(StateMenager.getState() != null)
-			StateMenager.getState().tick();
+		if(StateManager.getState() != null)
+			StateManager.getState().tick();
 	}
 	
 	private void render() {
@@ -79,8 +79,8 @@ public class Game implements Runnable {
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, width, height);
 		
-		if(StateMenager.getState() != null)
-			StateMenager.getState().render(g);
+		if(StateManager.getState() != null)
+			StateManager.getState().render(g);
 
 		g.setColor(Color.yellow);
 		g.drawString(
@@ -223,6 +223,14 @@ public class Game implements Runnable {
 
 	public void setStateName(String stateName) {
 		this.stateName = stateName;
+	}
+
+	public StateManager getStateMenager() {
+		return stateManager;
+	}
+
+	public void setStateMenager(StateManager stateManager) {
+		this.stateManager = stateManager;
 	}
 
 }

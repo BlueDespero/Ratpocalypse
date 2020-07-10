@@ -22,7 +22,10 @@ public abstract class Area {
 		for (PaintedButton paintedButton : buttonlist) {
 			Rectangle aux = new Rectangle(paintedButton.getX(), paintedButton.getY(), paintedButton.getWidth(), paintedButton.getHeigth());
 			if(aux.contains(x, y))
+			{
 				paintedButton.setSelected(true);
+				break;
+			}
 		}
 	}
 	

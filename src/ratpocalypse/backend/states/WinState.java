@@ -28,7 +28,7 @@ public class WinState extends State {
 			counter=0;
 			timer--;
 			if(timer==0)
-				StateMenager.setState("menu");
+				StateManager.setState("menu");
 		}
 	}
 
